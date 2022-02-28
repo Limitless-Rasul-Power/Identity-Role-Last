@@ -1,0 +1,29 @@
+﻿@model List<AppUser>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <table class="table">
+        <tr>
+            <th>Username</th>
+        </tr>
+        
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @user.UserName
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-username="@user.UserName">Edit</a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

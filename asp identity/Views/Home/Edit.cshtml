@@ -1,0 +1,48 @@
+﻿@model asp_identity.Models.UserViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>UserViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" disabled />
+                <span asp-validation-for="Username" class="text-danger"></span>
+
+                <input type="hidden" asp-for="Username" />
+
+            </div>
+            @*@foreach (var role in Model.Roles)
+        {
+            <label asp-for="@role.Name">@role.Name</label>
+            <input type="checkbox" name="@role.Name" id="@role.Name" value="@role.Name" checked="@role.IsEnabled" />
+        }*@
+
+            @for (int i = 0; i < Model.Roles.Count; i++)
+            {
+                <label asp-for="@Model.Roles[i].IsEnabled">@Model.Roles[i].Name</label>
+                <input type="checkbox" asp-for="@Model.Roles[i].IsEnabled" />
+                <input type="hidden" asp-for="@Model.Roles[i].Name" />
+            }
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
